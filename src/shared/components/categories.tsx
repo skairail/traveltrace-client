@@ -1,27 +1,49 @@
-import React from "react";
-import { categoriesApi } from "../api/categoriesApi";
+import { useState, useEffect } from "react";
 import { cn } from "../lib/utils";
+import { categoriesApi } from "../api/categoriesApi";
 
 interface Props {
   className?: string;
+  onSelectCategory: (category: string | null) => void;
 }
-const activeIndex = 0;
-export const Categories: React.FC<Props> = async ({ className }) => {
+
+export const Categories: React.FC<Props> = ({
+  className,
+  onSelectCategory,
+}) => {
+  const [categories, setCategories] = useState<string[]>([]);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchCategories() {
+      const data = await categoriesApi();
+      setCategories(data);
+    }
+    fetchCategories();
+  }, []);
+
+  const handleCategoryClick = (category: string) => {
+    const newCategory = activeCategory === category ? null : category;
+    setActiveCategory(newCategory);
+    onSelectCategory(newCategory);
+  };
+
   return (
     <div
       className={cn("inline-flex gap-1 bg-gray-50 p-1 rounded-2xl", className)}
     >
-      {(await categoriesApi()).map((cat, index) => (
-        <a
+      {categories.map((cat, index) => (
+        <button
+          key={index}
+          onClick={() => handleCategoryClick(cat)}
           className={cn(
             "flex items-center h-11 font-bold px-5 rounded-2xl",
-            activeIndex === index &&
+            activeCategory === cat &&
               "bg-white shadow-md shadow-gray-200 text-primary"
           )}
-          key={index}
         >
-          <button>{cat}</button>
-        </a>
+          {cat}
+        </button>
       ))}
     </div>
   );
