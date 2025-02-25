@@ -1,6 +1,6 @@
 import { getPlaces } from "@/entities/places/api";
-import { Container } from "@/shared/components/container";
-import { Title } from "@/shared/components/title";
+import { Container } from "@/shared/components/Container";
+import { Title } from "@/shared/components/Title";
 import HomeClient from "./HomeClient";
 
 export default async function Home() {

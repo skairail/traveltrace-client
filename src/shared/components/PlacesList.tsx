@@ -1,6 +1,6 @@
 import React from "react";
-import { Title } from "./title";
-import { PlaceCard } from "./place-card";
+import { Title } from "./Title";
+import { PlaceCard } from "./PlaceCard";
 
 interface Place {
   id: number;

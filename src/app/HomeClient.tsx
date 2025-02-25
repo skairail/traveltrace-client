@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { Categories } from "@/shared/components/categories";
-import { SortPopup } from "@/shared/components/sort-popup";
-import { Container } from "@/shared/components/container";
-import { PlacesList } from "@/shared/components/places-list";
+import { SortPopup } from "@/shared/components/SortPopup";
+import { Container } from "@/shared/components/Container";
+import { PlacesList } from "@/shared/components/PlacesList";
 
 interface Props {
   places: any[];

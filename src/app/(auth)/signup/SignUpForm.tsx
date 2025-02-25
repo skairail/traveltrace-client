@@ -34,7 +34,7 @@ export default function SignUpForm() {
       if (signInResult?.error) {
         setError(signInResult.error);
       } else {
-        router.push("/dashboard");
+        router.push("/");
       }
     } else {
       setError(result.message ?? "Unknown Erorr");
@@ -51,6 +51,16 @@ export default function SignUpForm() {
       <form action={handleSubmit}>
         <CardContent className="space-y-6 pt-6">
           <div className="space-y-2">
+            <Label htmlFor="username">Username</Label>
+            <Input
+              id="username"
+              name="username"
+              type="text"
+              required
+              placeholder="Enter your username"
+            />
+          </div>
+          {/* <div className="space-y-2">
             <Label htmlFor="name">Name</Label>
             <Input
               id="name"
@@ -59,7 +69,7 @@ export default function SignUpForm() {
               required
               placeholder="Enter your name"
             />
-          </div>
+          </div> */}
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input

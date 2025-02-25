@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { cn } from "../lib/utils";
-import { Container } from "./container";
+import { Container } from "./Container";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { User } from "lucide-react";

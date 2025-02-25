@@ -31,7 +31,7 @@ export default function SignInForm() {
     const formData = new FormData(event.currentTarget);
 
     const result = await signIn("credentials", {
-      redirect: false,
+      redirect: true,
       email: formData.get("email"),
       password: formData.get("password"),
     });

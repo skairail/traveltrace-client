@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { Title } from "./title";
+import { Title } from "./Title";
 
 interface Props {
   id: number;
