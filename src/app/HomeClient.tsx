@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Categories } from "@/shared/components/categories";
+import { Categories } from "@/shared/components/Categories";
 import { SortPopup } from "@/shared/components/SortPopup";
 import { Container } from "@/shared/components/Container";
 import { PlacesList } from "@/shared/components/PlacesList";
+import { Map } from "@/shared/components/Map";
 
 interface Props {
   places: any[];
@@ -18,11 +19,14 @@ export default function HomeClient({ places }: Props) {
     : places;
 
   return (
-    <div className="sticky top-0 bg-white py-5 shadow-lg shadow-black/5">
-      <Container className="flex items-center justify-between">
-        <Categories onSelectCategory={setCategory} />
-        <SortPopup />
-      </Container>
+    <div>
+      <div className="sticky top-0 bg-white py-5 shadow-lg shadow-black/5 z-10">
+        <Container className="flex items-center justify-between">
+          <Categories onSelectCategory={setCategory} />
+          <SortPopup />
+        </Container>
+      </div>
+      <Map></Map>
       <Container>
         <div className="flex-1">
           <div className="flex flex-col gap-16">
