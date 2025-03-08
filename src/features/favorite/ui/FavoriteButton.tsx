@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { addToFavorites } from "../api/addToFavorites";
+import { useEffect, useState } from "react";
+import { addToFavorites } from "../api/favorites";
 
 interface FavoriteButtonProps {
   placeId: number;
@@ -9,6 +9,19 @@ interface FavoriteButtonProps {
 const FavoriteButton: React.FC<FavoriteButtonProps> = ({ placeId, userId }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
+  const checkIfFavorite = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/favorites/check/${placeId}/${userId}`
+      );
+      if (response.ok) {
+        const isFavorite = await response.json();
+        setIsFavorite(isFavorite);
+      }
+    } catch (error) {
+      console.error("Failed to check favorite status:", error);
+    }
+  };
   const handleClick = async () => {
     try {
       await addToFavorites(placeId, userId);
@@ -18,6 +31,10 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ placeId, userId }) => {
       alert("Failed to add to favorites. Try again later.");
     }
   };
+
+  useEffect(() => {
+    checkIfFavorite();
+  }, [placeId, userId]);
 
   return (
     <button
