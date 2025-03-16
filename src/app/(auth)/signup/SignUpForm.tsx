@@ -60,16 +60,7 @@ export default function SignUpForm() {
               placeholder="Enter your username"
             />
           </div>
-          {/* <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
-            <Input
-              id="name"
-              name="name"
-              type="text"
-              required
-              placeholder="Enter your name"
-            />
-          </div> */}
+
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input
