@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { cn } from "../lib/utils";
-import { categoriesApi } from "../api/categoriesApi";
+import { cn } from "../../shared/lib/utils";
+import { categoriesApi } from "../../shared/api/categoriesApi";
 
 interface Props {
   className?: string;

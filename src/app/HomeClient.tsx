@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Categories } from "@/shared/components/Categories";
-import { SortPopup } from "@/shared/components/SortPopup";
-import { Container } from "@/shared/components/Container";
-import { PlacesList } from "@/shared/components/PlacesList";
+import { Categories } from "@/features/filter/Categories";
+import { SortPopup } from "@/features/filter/SortPopup";
+import { Container } from "@/layout/Container";
+import { PlacesList } from "@/features/places/PlacesList";
 import { Map } from "@/shared/components/Map";
 
 interface Props {

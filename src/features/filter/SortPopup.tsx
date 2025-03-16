@@ -2,8 +2,8 @@ import React from "react";
 
 import { ArrowUpDown } from "lucide-react";
 
-import { cn } from "../lib/utils";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { cn } from "@/shared/lib/utils";
+import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 
 interface Props {
   className?: string;

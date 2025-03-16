@@ -1,5 +1,5 @@
 import React from "react";
-import { Title } from "./Title";
+import { Title } from "@/shared/components/Title";
 import { PlaceCard } from "./PlaceCard";
 
 interface Place {
@@ -7,6 +7,7 @@ interface Place {
   name: string;
   slug: string;
   description: string;
+  shortDescription: string;
   photos: { photoUrl: string }[];
 }
 
@@ -27,7 +28,7 @@ export const PlacesList: React.FC<Props> = ({ name, items, className }) => {
             id={place.id}
             slug={place.slug}
             name={place.name}
-            description={place.description}
+            shortDescription={place.shortDescription}
             imageUrl={
               place.photos.length > 0
                 ? place.photos[0].photoUrl

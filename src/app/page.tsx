@@ -1,5 +1,5 @@
 import { getPlaces } from "@/entities/places/api";
-import { Container } from "@/shared/components/Container";
+import { Container } from "@/layout/Container";
 import { Title } from "@/shared/components/Title";
 import HomeClient from "./HomeClient";
 

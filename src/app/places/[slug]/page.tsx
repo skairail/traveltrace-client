@@ -1,4 +1,4 @@
-import PlacePage from "@/shared/components/PlacePage";
+import PlacePage from "@/features/places/PlacePage";
 
 const Page = async ({ params }: { params: { slug: string } }) => {
   const { slug } = await params;
