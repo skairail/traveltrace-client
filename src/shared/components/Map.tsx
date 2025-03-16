@@ -10,7 +10,9 @@ interface Props {
 export const Map: React.FC<Props> = ({ className }) => {
   return (
     <div
-      className={`relative h-64 max-w-6xl mt-8  max-w-md mx-auto bg-blue-50 rounded-lg overflow-hidden ${className}`}
+      className={
+        "relative h-64 max-w-7xl mt-8  mx-auto bg-blue-50 rounded-lg overflow-hidden"
+      }
     >
       <div className="absolute inset-0 opacity-50">
         <Image src="/map.svg" alt="World Map" fill className="object-cover" />
