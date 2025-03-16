@@ -26,7 +26,7 @@ export const authOptions: NextAuthOptions = {
         );
 
         if (!res.ok) {
-          console.error(`❌ Login failed: ${res.status}`);
+          console.error(` Login failed: ${res.status}`);
           throw new Error("Invalid credentials");
         }
 
@@ -43,18 +43,20 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        console.log("✅ JWT callback received user.token:", user.token);
+        token.id = user.id;
+        token.email = user.email;
         token.accessToken = user.token;
-      } else {
-        console.error("❌ JWT callback: user is undefined");
       }
       return token;
     },
     async session({ session, token }) {
-      return {
-        ...session,
-        accessToken: token.accessToken || null,
+      session.user = {
+        ...session.user,
+        id: token.id as string,
+        email: token.email as string,
       };
+      session.accessToken = token.accessToken as string;
+      return session;
     },
   },
   pages: {
