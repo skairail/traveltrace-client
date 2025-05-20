@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useDebouncedCallback } from "use-debounce";
 import { Input } from "@/shared/ui/input";
 
 interface Place {
@@ -10,7 +9,6 @@ interface Place {
   slug: string;
   photos: { photoUrl: string }[];
 }
-
 const SearchInput: React.FC<{ onQueryChange: (query: string) => void }> = ({
   onQueryChange,
 }) => {
@@ -58,31 +56,35 @@ export default function Search() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchPlaces = useDebouncedCallback(async (q: string) => {
-    if (!q) return setResults([]);
-    setIsLoading(true);
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/places/search?q=${q}`
-      );
-      if (!res.ok) throw new Error("Failed to fetch places");
-      const data = await res.json();
-      setResults(data);
-    } catch (err) {
-      setError("Error fetching places");
-    } finally {
-      setIsLoading(false);
+  useEffect(() => {
+    if (!query) {
+      setResults([]);
+      return;
     }
-  }, 300);
+
+    const timeout = setTimeout(async () => {
+      setIsLoading(true);
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/places/search?q=${query}`
+        );
+        if (!res.ok) throw new Error("Failed to fetch places");
+        const data = await res.json();
+        setResults(data);
+        setError(null);
+      } catch (err) {
+        setError("Error fetching places");
+      } finally {
+        setIsLoading(false);
+      }
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, [query]);
 
   return (
     <div className="relative w-80">
-      <SearchInput
-        onQueryChange={(q) => {
-          setQuery(q);
-          fetchPlaces(q);
-        }}
-      />
+      <SearchInput onQueryChange={setQuery} />
       {isLoading && (
         <div className="absolute z-50 mt-2 w-full bg-white text-center">
           Loading...
