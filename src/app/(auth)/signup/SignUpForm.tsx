@@ -24,21 +24,23 @@ export default function SignUpForm() {
   async function handleSubmit(formData: FormData) {
     const result = await signUp(formData);
 
-    if (result.success) {
-      const signInResult = await signIn("credentials", {
-        email: formData.get("email"),
-        password: formData.get("password"),
-        redirect: false,
-      });
-
-      if (signInResult?.error) {
-        setError(signInResult.error);
-      } else {
-        router.push("/");
-      }
-    } else {
-      setError(result.message ?? "Unknown Erorr");
+    if (!result.success) {
+      setError(result.message ?? "Unknown Error");
+      return;
     }
+
+    const signInResult = await signIn("credentials", {
+      email: formData.get("email"),
+      password: formData.get("password"),
+      redirect: false,
+    });
+
+    if (signInResult?.error) {
+      setError(signInResult.error);
+      return;
+    }
+
+    router.push("/");
   }
 
   return (
@@ -48,7 +50,7 @@ export default function SignUpForm() {
           Sign Up
         </CardTitle>
       </CardHeader>
-      <form action={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <CardContent className="space-y-6 pt-6">
           <div className="space-y-2">
             <Label htmlFor="username">Username</Label>

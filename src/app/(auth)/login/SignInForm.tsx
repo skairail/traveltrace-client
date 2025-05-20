@@ -35,6 +35,10 @@ export default function SignInForm() {
       email: formData.get("email"),
       password: formData.get("password"),
     });
+
+    if (result?.error) {
+      setError("Invalid email or password");
+    }
   }
 
   return (
